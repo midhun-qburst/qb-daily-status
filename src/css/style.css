@@ -7,3 +7,20 @@
 .page-title {
     margin: 12px 0 28px;
 }
+
+select{
+    background: #fff;
+    width: 150px;
+    height: 30px;
+    height: 30px;
+    line-height: 15px;
+    font-size: 12px;
+}
+select:hover{
+    border-width: 1px;
+    border-color: #5D98CC;
+    outline: none;
+}
+select:focus{
+    outline: none;
+}
