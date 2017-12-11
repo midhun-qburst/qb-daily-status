@@ -1,3 +1,4 @@
+
 .txt-color-blueDark {
     font-family: "Open Sans",Arial,Helvetica,Sans-Serif;
     color: #4c4f53;
@@ -7,7 +8,20 @@
 .page-title {
     margin: 12px 0 28px;
 }
-
+h2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+#timeInHour, #timeInMin {
+    width: 50px;
+}
+input {
+    width: 100%;
+}
+.padding-10 {
+    padding: 10px;
+    border-color: gray;
+}
 select{
     background: #fff;
     width: 150px;
