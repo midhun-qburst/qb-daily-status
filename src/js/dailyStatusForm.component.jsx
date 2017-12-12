@@ -93,11 +93,13 @@ export default class DailyStatusForm extends Component {
                         </div>
                         <div className="form-group col-md-6">
                             <p className='padding-top-10 margin-top-10'>Also, if you are learning something, mention the platform name too.(Java, iPhone etc).<br />
-                                Directions:<br /><br />
-                                <i class="fa fa-asterisk"></i> Do not include lunch time and long breaks greater than 15 minutes.<br />
-                                <i class="fa fa-asterisk"></i> You are expected to put in 8 hours a day. <br />
-                                <i class="fa fa-asterisk"></i> However report actual hours worked whether it is lesser or greater than 8 hours.
-                                </p>
+                                Directions:
+                                <div className='margin-top-10'>
+                                    <i class="fa fa-asterisk"></i> Do not include lunch time and long breaks greater than 15 minutes.<br />
+                                    <i class="fa fa-asterisk"></i> You are expected to put in 8 hours a day. <br />
+                                    <i class="fa fa-asterisk"></i> However report actual hours worked whether it is lesser or greater than 8 hours.
+                                </div>
+                            </p>
                         </div>
                     </div>
                     <hr />
