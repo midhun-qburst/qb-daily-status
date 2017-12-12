@@ -22,9 +22,6 @@ export default class DailyStatusForm extends Component {
     handleSubmit(event) {
         // event.preventDefault();
     }
-
-
-
     render() {
         return (
             <div className='padding-10'>
@@ -92,20 +89,20 @@ export default class DailyStatusForm extends Component {
                     <div className='row'>
                         <div className="form-group col-md-6">
                             <strong>180</strong>
-                            
+
                         </div>
                         <div className="form-group col-md-6">
-                            <p className='padding-top-10 margin-top-10'>Also, if you are learning something, mention the platform name too.(Java, iPhone etc).<br/>
-                                Directions:<br/><br/>
-                                <i class="fa fa-asterisk"></i> Do not include lunch time and long breaks greater than 15 minutes.<br/>
-                                <i class="fa fa-asterisk"></i> You are expected to put in 8 hours a day. <br/>
-                                <i class="fa fa-asterisk"></i> However report actual hours worked whether it is lesser or greater than 8 hours. 
+                            <p className='padding-top-10 margin-top-10'>Also, if you are learning something, mention the platform name too.(Java, iPhone etc).<br />
+                                Directions:<br /><br />
+                                <i class="fa fa-asterisk"></i> Do not include lunch time and long breaks greater than 15 minutes.<br />
+                                <i class="fa fa-asterisk"></i> You are expected to put in 8 hours a day. <br />
+                                <i class="fa fa-asterisk"></i> However report actual hours worked whether it is lesser or greater than 8 hours.
                                 </p>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="center">
-                    <button  className='btn btn-primary' id="activityDesc" >Save</button>
+                        <button className='btn btn-primary' id="activityDesc" >Save</button>
                     </div>
 
                 </form>
