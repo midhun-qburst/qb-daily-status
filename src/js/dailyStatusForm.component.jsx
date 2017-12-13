@@ -6,21 +6,25 @@ import { timeDropdown, activityTypeDropdown, projectDropdown } from './constants
 export default class DailyStatusForm extends Component {
     constructor(props) {
         super(props);
+        const currentDate = new Date();
         this.state = {
-            date: '',
-            project: '',
+            date: [currentDate.getDate(), currentDate.getMonth() + 1,currentDate.getFullYear()].join('/'),
+            project: 'N/A',
             activityType: 'Coding',
             timeSpent: {
                 hrs: '08',
                 min: '00'
             },
-            activityDescription: ''
+            activityDescription: '',
+            postedOn: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleActivityDescChange = this.handleActivityDescChange.bind(this);
         this.handleActivityTypeChange = this.handleActivityTypeChange.bind(this);
         this.handleTimeHrsChange = this.handleTimeHrsChange.bind(this);
         this.handleTimeMinChange = this.handleTimeMinChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        
 
 
         this.dateDropdown = this.dateDropdown.bind(this);
@@ -28,6 +32,10 @@ export default class DailyStatusForm extends Component {
 
     }
     handleSubmit(event) {
+        const date = new Date();
+        console.log(date);
+        //this.setState({ postedOn: event.target.value });
+        
         const dailyStatus = this.state;
         if (localStorage.getItem('status') === null) {
             let statusArray = [];
@@ -35,10 +43,13 @@ export default class DailyStatusForm extends Component {
             localStorage.setItem('status', JSON.stringify(statusArray));
         } else {
             let statusArray = JSON.parse(localStorage.getItem('status'));
-            statusArray.push(book);
+            statusArray.push(dailyStatus);
             localStorage.setItem('status', JSON.stringify(statusArray));
         }
         event.preventDefault();
+    }
+    handleDateChange(event) {
+        this.setState({ date: event.target.value });
     }
     handleActivityTypeChange(event) {
         this.setState({ activityType: event.target.value });
@@ -57,11 +68,11 @@ export default class DailyStatusForm extends Component {
         this.setState({ timeSpent: { min: event.target.value } });
     }
 
-    dateDropdown() {
-        debugger;
+    dateDropdown =() => {
         let currentDate = new Date();
         let dateArray = [0, 1, 2, 3, 4, 5, 6];
-        dateArray.map((days) => {
+        
+        return dateArray.map((days) => {
             let last = new Date(currentDate.getTime() - (days * 24 * 60 * 60 * 1000));
             let day = last.getDate();
             let month = last.getMonth() + 1;
@@ -70,6 +81,8 @@ export default class DailyStatusForm extends Component {
             return <option key={date} value={date}>{date}</option>;
         });
     }
+    dateDropdownArray = this.dateDropdown();
+    
 
     render() {
         return (
@@ -80,9 +93,9 @@ export default class DailyStatusForm extends Component {
                         <div className="form-group col-md-3">
                             <label for="date">Date</label>
                             <div>
-                                <select id='date' value={this.state.date} >
+                                <select id='date' value={this.state.date} onChange={this.handleDateChange} >
                                     {
-                                         this.dateDropdown()
+                                         this.dateDropdownArray
                                     }
                                 </select>
                             </div>
