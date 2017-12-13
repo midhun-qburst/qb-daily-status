@@ -17,16 +17,20 @@ export default class DailyStatusForm extends Component {
             activityDescription: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleActivityDescChange = this.handleActivityDescChange.bind(this); 
 
     }
     handleSubmit(event) {
         // event.preventDefault();
     }
+    handleActivityDescChange(event) {debugger
+        this.setState({activityDescription: event.target.value});
+      }
     render() {
         return (
             <div className='padding-10'>
                 <form onSubmit={this.handleSubmit}>
-                    <h2 className='page-title' >Bursts</h2>
+                    <h2 className='title--margin' >Bursts</h2>
                     <div className='row'>
                         <div className="form-group col-md-3">
                             <label for="date">Date</label>
@@ -75,7 +79,7 @@ export default class DailyStatusForm extends Component {
                     <div className='row'>
                         <div className="form-group col-md-6">
                             <label for="activityDesc">Activity description</label><br />
-                            <textarea id="activityDesc" rows="7" maxLength='180'
+                            <textarea id="activityDesc" rows="7" maxLength='180' onChange={this.handleActivityDescChange}
                                 placeholder="Use T# or t# in your description to indicate Redmine ticket/task. For example : T#1234" >
                             </textarea>
                         </div>
@@ -88,7 +92,7 @@ export default class DailyStatusForm extends Component {
                     </div>
                     <div className='row'>
                         <div className="form-group col-md-6">
-                            <strong>180</strong>
+                            <strong>{(180 - this.state.activityDescription.length)}</strong>
 
                         </div>
                         <div className="form-group col-md-6">

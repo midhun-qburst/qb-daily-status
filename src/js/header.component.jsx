@@ -4,6 +4,6 @@ import '../css/style.css';
 
 export default class Heading extends Component {
     render() {
-        return <h1 className="txt-color-blueDark page-title">Daily Status </h1>;
+        return <h1 className="title title--margin">Daily Status </h1>;
     }
 }
