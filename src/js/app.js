@@ -5,20 +5,30 @@ import DailyStatusForm from './dailyStatusForm.component'
 import HistoryCard from './historyCard.component';
 
 export default class DailyStatus extends Component {
-    
-     history = JSON.parse(localStorage.getItem('status'));
+    constructor(props) {
+        super(props);
+        this.getHistory = this.getHistory.bind(this);
+    }
+    getHistory = () => {
+        let statusHistory = JSON.parse(localStorage.getItem('status'));
+        if (statusHistory) {
+            return statusHistory.map((item) => {
+                return <HistoryCard status={item} />
+            })
+        }
+        else {
+            return null;
+        }
+    }
+
     render() {
+
         return (
             <div className='container'>
                 <Heading />
                 <DailyStatusForm />
-                {   
-                    history.length > 0 ?  this.history.map((item)=> {
-                       return <HistoryCard status = {item} />
-                        
-                    }) : ''
-                }
-                
+                <h2 className ='title--margin' >My history</h2>
+                {this.getHistory()}
             </div>
         );
     }

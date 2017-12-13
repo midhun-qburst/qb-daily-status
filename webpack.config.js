@@ -23,7 +23,7 @@ let config = {
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html'),
     }),
-      new UglifyJsPlugin()
+     // new UglifyJsPlugin()
     // new webpack.optimize.UglifyJsPlugin({
     //   sourceMap: true,
     //   minimize: true,
