@@ -4,6 +4,19 @@ import '../css/style.css';
 
 export default class historyCard extends Component {
     render() {
-        return <h1 className="txt-color-blueDark page-title">My history</h1>;
+        return (
+            <form>
+            <div className='row'>
+            
+            <div className="col-md-2">dfdf
+            </div>
+            <div className="col-md-8">dfdf
+            </div>
+            <div className="col-md-2">dfdfd
+            </div>
+            </div>
+            </form>
+            
+        );
     }
 }

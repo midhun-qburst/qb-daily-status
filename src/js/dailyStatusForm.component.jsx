@@ -17,15 +17,60 @@ export default class DailyStatusForm extends Component {
             activityDescription: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleActivityDescChange = this.handleActivityDescChange.bind(this); 
+        this.handleActivityDescChange = this.handleActivityDescChange.bind(this);
+        this.handleActivityTypeChange = this.handleActivityTypeChange.bind(this);
+        this.handleTimeHrsChange = this.handleTimeHrsChange.bind(this);
+        this.handleTimeMinChange = this.handleTimeMinChange.bind(this);
+
+
+        this.dateDropdown = this.dateDropdown.bind(this);
+
 
     }
     handleSubmit(event) {
-        // event.preventDefault();
+        const dailyStatus = this.state;
+        if (localStorage.getItem('status') === null) {
+            let statusArray = [];
+            statusArray.push(dailyStatus);
+            localStorage.setItem('status', JSON.stringify(statusArray));
+        } else {
+            let statusArray = JSON.parse(localStorage.getItem('status'));
+            statusArray.push(book);
+            localStorage.setItem('status', JSON.stringify(statusArray));
+        }
+        event.preventDefault();
     }
-    handleActivityDescChange(event) {debugger
-        this.setState({activityDescription: event.target.value});
-      }
+    handleActivityTypeChange(event) {
+        this.setState({ activityType: event.target.value });
+    }
+    /**
+     * handles onChange event of activity description.
+     * @param {*} event 
+     */
+    handleActivityDescChange(event) {
+        this.setState({ activityDescription: event.target.value });
+    }
+    handleTimeHrsChange(event) {
+        this.setState({ timeSpent: { hrs: event.target.value } });
+    }
+    handleTimeMinChange(event) {
+        this.setState({ timeSpent: { min: event.target.value } });
+    }
+
+    dateDropdown() {
+        debugger;
+        let currentDate = new Date();
+        let dateArray = [0, 1, 2, 3, 4, 5, 6];
+        dateArray.map((days) => {
+            let last = new Date(currentDate.getTime() - (days * 24 * 60 * 60 * 1000));
+            let day = last.getDate();
+            let month = last.getMonth() + 1;
+            let year = last.getFullYear();
+            let date = [day, month, year].join('/');
+            return <option key={date} value={date}>{date}</option>;
+        });
+    }
+
     render() {
         return (
             <div className='padding-10'>
@@ -34,21 +79,30 @@ export default class DailyStatusForm extends Component {
                     <div className='row'>
                         <div className="form-group col-md-3">
                             <label for="date">Date</label>
-                            <input type="text" id="date" />
+                            <div>
+                                <select id='date' value={this.state.date} >
+                                    {
+                                         this.dateDropdown()
+                                    }
+                                </select>
+                            </div>
                         </div>
                         <div className="form-group col-md-3">
-                            <label for="project">Project</label><br />
-                            <select id='project' value='' >
-                                {
-                                    projectDropdown.map((activity) => {
-                                        return <option key={activity} value={activity}>{activity}</option>;
+                            <label for="project">Project</label>
+                            <div>
+                                <select id='project' value='' >
+                                    {
+                                        projectDropdown.map((activity) => {
+                                            return <option key={activity} value={activity}>{activity}</option>;
 
-                                    })
-                                }
-                            </select>                    </div>
+                                        })
+                                    }
+                                </select></div>
+                        </div>
                         <div className="form-group col-md-3">
-                            <label for="activityType">Activity type</label><br />
-                            <select id='activityType' value={this.state.activityType} >
+                            <label for="activityType">Activity type</label>
+                            <div>
+                            <select id='activityType' value={this.state.activityType} onChange={this.handleActivityTypeChange} >
                                 {
                                     activityTypeDropdown.map((activity) => {
                                         return <option key={activity} value={activity}>{activity}</option>;
@@ -56,10 +110,12 @@ export default class DailyStatusForm extends Component {
                                     })
                                 }
                             </select>
+                            </div>
                         </div>
                         <div className="form-group col-md-3">
-                            <label for="timeInHour">Time spent(hours:minutes)</label><br />
-                            <select id='timeInHour' value={this.state.timeSpent.hrs} >
+                            <label for="timeInHour">Time spent(hours:minutes)</label>
+                            <div>
+                            <select id='timeInHour' value={this.state.timeSpent.hrs} onChange={this.handleTimeHrsChange} >
                                 {
                                     timeDropdown.hrs.map((hours) => {
                                         return <option key={hours} value={hours}>{hours}</option>;
@@ -67,13 +123,14 @@ export default class DailyStatusForm extends Component {
                                     })
                                 }
                             </select>
-                            <select id='timeInMin' value={this.state.timeSpent.min} >
+                            <select id='timeInMin' value={this.state.timeSpent.min} onChange={this.handleTimeMinChange} >
                                 {
                                     timeDropdown.min.map((minutes) => {
                                         return <option key={minutes} value={minutes}>{minutes}</option>;
                                     })
                                 }
                             </select>
+                            </div>
                         </div>
                     </div>
                     <div className='row'>
